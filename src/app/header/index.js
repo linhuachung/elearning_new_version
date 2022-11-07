@@ -52,7 +52,7 @@ function Header(props) {
                 className="menu-item"
                 onClick={activeHome}
             >
-                Logo
+                <img src={Images.LOGO} alt="logo"/>
             </NavLink>
             <div className="header-right">
                 <p className="menu-item link-login" onClick={onLogout}>
