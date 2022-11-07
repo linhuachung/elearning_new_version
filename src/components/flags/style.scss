@@ -1,3 +1,24 @@
+.ant-modal-body{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background: #89898924;
+}
+.flag-active, .flag-noneActive{
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  border-radius: 2px 2px 0 0;
+  img {
+    margin: auto;
+    height: 24px;
+    width: 35px;
+    cursor: pointer;
+  }
+}
+.flag-active{
+  border: 1px solid red;
+}
 .flags {
   position: relative;
   width: 45px;

@@ -35,10 +35,14 @@ function Login(props) {
     const accountStore = useSelector(state => state.account)
     const onSubmit = (values) => {
         const {translate} = props
-        dispatch(actions.login(values, (action, data, error) => {
+        const data ={
+            taikhoan:values.username,
+            matkhau:values.password
+        }
+        dispatch(actions.login(data, (action, data, error) => {
             if (action === TYPES.LOGIN_SUCCESS) {
-                Storage.set('ACCESS_TOKEN', data.token)
-                Request.setAccessToken(`Bearer ${data.token}`)
+                Storage.set('ACCESS_TOKEN', data.accessToken)
+                Request.setAccessToken(`Bearer ${data.accessToken}`)
                 Notification.success(translate('success-messages.LOGIN_SUCCESS'))
                 history.push("/");
             }

@@ -32,8 +32,8 @@ const PrivateRoute = ({condition, redirect, ...props}) => {
     if (condition) return <Route {...props} />
     return <Redirect to={redirect}/>
 }
-const PublicRoute = ({...props}) => {
-    return <Route {...props} />
+const PublicRoute = ({condition, redirect, ...props}) => {
+  return <Route {...props} />
 }
 setLocale({
     mixed: {
@@ -50,7 +50,7 @@ setLocale({
 function RoutesComponent(props) {
     const {initialize, addTranslationForLanguage: add} = props
     useEffect(() => {
-        if (Storage.get('LANGUAGE') === 'vi') {
+        if (!Storage.has('LANGUAGE') || Storage.get('LANGUAGE') === 'vi') {
             initialize({
                 languages: [{
                     name: 'Vietnamese',
@@ -116,10 +116,8 @@ function RoutesComponent(props) {
     if (token) {
         Request.setAccessToken(`Bearer ${token}`)
     }
-
     const renderLazyComponent = (LazyComponent, params) => (props) => <LazyComponent {...props} {...params} />
-
-    const renderAuthRoutes = () => (
+     const renderAuthRoutes = () => (
         <Suspense fallback={<Page className="page-loading"><Loading/></Page>}>
             <Header/>
             <NavBar/>
@@ -132,7 +130,7 @@ function RoutesComponent(props) {
     const renderPublicRoutes = () => (
         <Suspense fallback={<Page className="page-loading"><Loading/></Page>}>
             <Header/>
-            <NavBar/>
+            {/*<NavBar/>*/}
             <Switch>
                 <Route exact path="/" component={renderLazyComponent(Home)}/>
                 <Redirect to="/not-found"/>
@@ -143,7 +141,7 @@ function RoutesComponent(props) {
         <BrowserRouter>
             <Suspense fallback={<Page><Loading/></Page>}>
                 <Switch>
-                    <Route exact path="/login" component={renderLazyComponent(Login)}/>
+                    {token ?  <PublicRoute component={renderPublicRoutes}/> : <Route exact path="/login" component={renderLazyComponent(Login)}/>}
                     <Route path="/not-found" component={renderLazyComponent(NotFound)}/>
                     <PublicRoute
                         component={renderPublicRoutes}

@@ -1,5 +1,11 @@
 {
   "app": {
     "Home": "Trang chủ"
+  },
+  "header": {
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất",
+    "signup": "Đăng ký",
+    "categories": "Danh mục"
   }
 }

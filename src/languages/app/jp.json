@@ -1,5 +1,11 @@
 {
   "app": {
     "Home": "家"
+  },
+  "header": {
+    "login": "ログインする",
+    "logout": "ログアウト",
+    "signup": "サインアップ",
+    "categories": "カテゴリー"
   }
 }

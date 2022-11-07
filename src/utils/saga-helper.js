@@ -15,30 +15,41 @@ export default ({api, successMessage, errorHandler}) => function* ({type, data, 
     try {
         yield put({type: `${type}_REQUEST`, payload: data})
 
-        const {success, result, error} = yield api(data)
-
-        if (success) {
-            yield put({type: successType, data: result, payload: data})
+        const {accessToken, success, error} = yield api(data)
+        const result = yield api(data)
+        const dataResult = {
+            ...yield api(data)
+        }
+        if (accessToken) {
+            yield put({type: successType, data: dataResult, payload: data})
 
             if (successMessage) Notification.success(successMessage)
 
-            if (callback) callback(successType, result)
+            if (callback) callback(successType, dataResult)
         }
+        yield put({type: successType, data: result, payload: data})
+        // if (success) {
+        //     yield put({type: successType, data: result, payload: data})
+        //
+        //     if (successMessage) Notification.success(successMessage)
+        //
+        //     if (callback) callback(successType, result)
+        // }
 
-        if (error) {
-            if (['TOKEN_EXPIRED', 'INVALID_TOKEN'].includes(error.code)) {
-                Storage.clear()
-                yield put(push('/login'))
-                yield put(actions.clearStore())
-            }
+        // if (error) {
+        //     if (['TOKEN_EXPIRED', 'INVALID_TOKEN'].includes(error.code)) {
+        //         Storage.clear()
+        //         yield put(push('/login'))
+        //         yield put(actions.clearStore())
+        //     }
+        //
+        //     yield put({type: failureType, error})
+        //     if (callback) callback(failureType, result, error)
+        // }
 
-            yield put({type: failureType, error})
-            if (callback) callback(failureType, result, error)
-        }
-
-        if (!error && !success) {
-            throw result
-        }
+        // if (!error && !success) {
+        //     throw result
+        // }
     } catch (e) {
         if (e) {
             const error = yield Misc.getErrorJsonBody(e)

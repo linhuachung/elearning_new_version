@@ -5,6 +5,10 @@ export default [
   // API
   'LOGIN',
 
+  //  COURSE
+    "LIST_COURSE_BY_CATEGORIES",
+    "LIST_CATEGORIES",
+
   // Store
   'CLEAR_STORE'
 ]

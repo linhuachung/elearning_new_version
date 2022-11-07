@@ -2,16 +2,13 @@
 
 @media (min-width: 320px) {
   .page {
-    width: 100%;
     min-height: 100%;
-    background: #f4f7fc;
-    padding-left: 0;
-    padding-top: 50px;
+    padding-top: 70px;
+    max-width: 2144px ;
   }
 }
 
 @media (min-width: 1024px) {
   .page {
-    padding-left: 250px;
   }
 }

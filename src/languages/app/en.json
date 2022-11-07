@@ -1,5 +1,11 @@
 {
   "app": {
     "Home": "Home"
+  },
+  "header": {
+    "login": "Log In",
+    "logout": "Log out",
+    "signup": "Sign up",
+    "categories": "Categories"
   }
 }

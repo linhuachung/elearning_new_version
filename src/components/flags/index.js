@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useState} from 'react'
+import React, {Component, useEffect, useRef, useState} from 'react'
 import {withLocalize} from 'react-localize-redux'
 
 import Storage from '@/utils/storage'
@@ -7,10 +7,36 @@ import Storage from '@/utils/storage'
 import {Images} from '@/theme'
 import './style.scss'
 
+import ModalComponents from '@/components/modal'
+
 
 function Flags(props) {
+    const ref = useRef()
     const [imageFlag, setImageFlag] = useState({name: 'Vietnamese', code: 'vi', active: true})
-
+    const dropDownFlag = () => {
+        const {languages, setActiveLanguage} = props
+        return(
+            <div className="dropdown-flags">
+                {languages.map((language) => !language.active &&
+                    (
+                        <img
+                            onClick={() => {
+                                setActiveLanguage(language.code)
+                                Storage.set('LANGUAGE', language.code)
+                                setImageFlag({
+                                    name: `${language.name}`, code: `${language.code}`, active: true
+                                })
+                            }}
+                            key={language.code}
+                            src={Images[`${language.code.toUpperCase()}_FLAG`]}
+                            className={language.active ? 'flag active' : 'flag'}
+                            alt=""
+                        />
+                    )
+                )}
+            </div>
+        )
+    }
     useEffect(() => {
         if (!Storage.has('LANGUAGE') || Storage.get('LANGUAGE') === 'vi') {
             setImageFlag({
@@ -32,29 +58,40 @@ function Flags(props) {
     }, [])
     const {languages, setActiveLanguage} = props
     return (
-        <div className="flags">
-            <img src={Images[`${imageFlag.code.toUpperCase()}_FLAG`]} className="flag" alt=""/>
-            <div className="dropdown-flags">
-                {languages.map((language) => !language.active &&
-                    (
-                        <img
-                            onClick={() => {
-                                setActiveLanguage(language.code)
-                                Storage.set('LANGUAGE', language.code)
-                                setImageFlag({
-                                    name: `${language.name}`, code: `${language.code}`, active: true
-                                })
-                            }}
-                            key={language.code}
-                            src={Images[`${language.code.toUpperCase()}_FLAG`]}
-                            className={language.active ? 'flag active' : 'flag'}
-                            alt=""
-                        />
-                    )
-                )}
+        <>
+            <div className="flags" onClick={() => ref.current.openModal()} >
+                <img src={Images[`${imageFlag.code.toUpperCase()}_FLAG`]} className="flag" alt=""/>
             </div>
-        </div>
-    )
+            <ModalComponents ref={ref}>
+                    {languages.map((language) =>
+                        (
+                           <div
+                               onClick={() => {
+                               setActiveLanguage(language.code)
+                               Storage.set('LANGUAGE', language.code)
+                               setImageFlag({name: `${language.name}`, code: `${language.code}`, active: true})
+                                   language.active ? ref.current.closeModal() : null
+
+                               }}
+
+                                 key={language.code}
+                                className={language.active ? 'flag-active' : 'flag-noneActive'}
+
+                           >
+                               <img
+                                   src={Images[`${language.code.toUpperCase()}_FLAG`]}
+                                   alt=""
+                                   className="flag-img"
+                               />
+                               <p>{language.name}</p>
+                           </div>
+                        )
+                    )}
+            </ModalComponents>
+        </>
+
+
+)
 }
 
 export default withLocalize(Flags)

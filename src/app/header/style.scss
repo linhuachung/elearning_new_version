@@ -1,3 +1,4 @@
+
 header {
   position: fixed;
   top: 0;
@@ -6,36 +7,121 @@ header {
   justify-content: space-between;
   align-items: center;
   height: 50px;
-  padding: 0 15px;
-  background: #333;
+  padding: 30px 15px;
+  background: #fff;
   z-index: 1000;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
+
   .header-right {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+
     .menu-item {
       margin-right: 20px;
     }
   }
-  a.menu-item,
-  i.anticon-menu,
-  .link-login {
-    font-family: "Hiragino Sans GB W6";
-    font-weight: bolder;
-    color: #479c08;
-    &:hover {
-      color: #479c08;
+
+  .header-left {
+    display: flex;
+    align-items: center;
+
+    .categories-header {
+      margin-left: 5px;
+      position: relative;
       cursor: pointer;
-      text-decoration: underline;
+
+      .dropdown-menu {
+        position: absolute;
+        display: none;
+        width: 170px;
+        border-radius: 0 0 2px 2px;
+        background: #fff;
+        box-shadow: 0 0 0 1px #d1d7dc, 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
+      }
+
+      .dropdown-menu-animation {
+        animation: growDown 0.2s ease-in-out;
+      }
+
+      .dropdown-item {
+        border-bottom: 1px solid #8080802e;
+        color: black;
+        display: block;
+        padding: 10px 15px;
+        transition: all 0.4s;
+
+        &:hover {
+          color: #5624d0;
+          background: #8080802e;
+
+        }
+      }
+    }
+
+    .categories-header:hover {
+      .dropdown-menu {
+        display: block;
+      }
+    }
+
+    .menu-item {
+      margin-right: 5px;
+      width: 130px;
+
+      img {
+        width: 100%;
+      }
     }
   }
-  .flags {
-    img {
-      height: 24px;
-      width: auto;
-      cursor: pointer;
+
+  @keyframes growDown {
+    0% {
+      transform: scale(0)
+    }
+    100% {
+      transform: scale(1)
     }
   }
+
+  .header-right {
+    .link-login {
+      width: 80px;
+      text-align: center;
+      margin: 0 5px;
+      border: 1px solid #1c1d1f;
+      color: #1c1d1f;
+      background-color: transparent;
+      padding: 5px;
+      cursor: pointer;
+      transition: all 0.5s;
+      font-weight: bold;
+      font-size: 13px;
+      padding: 9px 0px;
+
+    }
+
+    .link-login:hover {
+      background: #80808038;
+    }
+  }
+
+  .flags-login {
+    border: 1px solid #1c1d1f;
+    margin: 0 5px;
+
+    .flags {
+      height: 37.14px;
+      display: block;
+
+      img {
+        height: 24px;
+        width: auto;
+        cursor: pointer;
+      }
+    }
+  }
+
 }
 
 /*===============  RESPONSIVE  ==================*/
@@ -45,6 +131,7 @@ header {
     .link-login {
       display: none;
     }
+
     .btn-menu-header {
       margin-left: 20px;
     }
@@ -56,6 +143,7 @@ header {
     .btn-menu-header {
       display: none;
     }
+
     .link-login {
       display: block;
     }
