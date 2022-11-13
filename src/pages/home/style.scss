@@ -1,37 +1,24 @@
 .home {
-  .nav-menu {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-wrap: wrap;
-    .menu-item {
-      width: 32%;
-      height: 90px;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      background: #fff;
-      padding: 15px 20px;
-      border-radius: 3px;
-      margin-bottom: 2%;
-      overflow: hidden;
-      > span {
-        font-size: 1.5rem;
-        color: #3c492f;
-      }
-      &:hover {
-        background: #e9ffda;
+  .slick-slider {
+    button {
+      //background: red;
+      
+    }
+  }
+
+  .slick-slide {
+    max-width: 200px;
+    margin: 5px 15px;
+
+    .carousel_item {
+
+      img {
+        width: 100%;
       }
     }
   }
-  .link-table {
-    text-align: right;
-    margin-top: 10px;
-  }
-  .ant-table-pagination {
-    display: none;
-  }
 }
+
 
 /*===============  RESPONSIVE  ==================*/
 
@@ -54,6 +41,7 @@
         width: 49%;
         margin-right: 2%;
         margin-bottom: 15px;
+
         &:nth-child(even) {
           margin-right: 0;
         }
@@ -69,12 +57,15 @@
         width: 32%;
         margin-right: 2%;
         margin-bottom: 2%;
+
         &:nth-child(even) {
           margin-right: 2%;
         }
+
         &:nth-child(3n + 0) {
           margin-right: 0;
         }
+
         > span {
           font-size: 1.125rem;
         }
