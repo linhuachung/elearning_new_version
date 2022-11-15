@@ -17,6 +17,8 @@ import VI from '@/languages/app/vi.json'
 /** Layout */
 import NavBar from '@/app/nav-bar'
 import Header from '@/app/header'
+import Footer from '@/app/footer'
+
 /** component */
 import Loading from '@/components/loading'
 import Page from '@/components/page'
@@ -120,11 +122,12 @@ function RoutesComponent(props) {
      const renderAuthRoutes = () => (
         <Suspense fallback={<Page className="page-loading"><Loading/></Page>}>
             <Header/>
-            <NavBar/>
+            {/*<NavBar/>*/}
             <Switch>
                 <Route path="/not-found" component={renderLazyComponent(NotFound)}/>
                 <Redirect to="/not-found"/>
             </Switch>
+            <Footer/>
         </Suspense>
     )
     const renderPublicRoutes = () => (
@@ -135,6 +138,7 @@ function RoutesComponent(props) {
                 <Route exact path="/" component={renderLazyComponent(Home)}/>
                 <Redirect to="/not-found"/>
             </Switch>
+            <Footer/>
         </Suspense>
     )
     return (

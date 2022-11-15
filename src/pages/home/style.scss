@@ -1,36 +1,28 @@
 .home {
-  .nav-menu {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-wrap: wrap;
-    .menu-item {
-      width: 32%;
-      height: 90px;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      background: #fff;
-      padding: 15px 20px;
-      border-radius: 3px;
-      margin-bottom: 2%;
-      overflow: hidden;
-      > span {
-        font-size: 1.5rem;
-        color: #3c492f;
-      }
-      &:hover {
-        background: #e9ffda;
+  .slick-slider {
+    button {
+      //background: red;
+
+    }
+  }
+
+  .slick-slide {
+    div{
+      //margin: 0 5px;
+    }
+    .carousel_item {
+      width: 90% !important;
+      display: block !important;
+      margin: 0 auto;
+      img {
+        width: 100%;
       }
     }
   }
-  .link-table {
-    text-align: right;
-    margin-top: 10px;
-  }
-  .ant-table-pagination {
-    display: none;
-  }
+}
+.section_course{
+  border: 1px solid #d1d7dc;
+  padding: 3.2rem;
 }
 
 /*===============  RESPONSIVE  ==================*/
@@ -54,6 +46,7 @@
         width: 49%;
         margin-right: 2%;
         margin-bottom: 15px;
+
         &:nth-child(even) {
           margin-right: 0;
         }
@@ -69,12 +62,15 @@
         width: 32%;
         margin-right: 2%;
         margin-bottom: 2%;
+
         &:nth-child(even) {
           margin-right: 2%;
         }
+
         &:nth-child(3n + 0) {
           margin-right: 0;
         }
+
         > span {
           font-size: 1.125rem;
         }
