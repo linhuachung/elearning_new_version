@@ -3,21 +3,23 @@ import {useDispatch, useSelector} from "react-redux";
 
 /** component */
 import Page from '@/components/page'
-import Carousel from "@/components/carousel";
 import {TYPES, actions} from '@/store/actions'
+import Carousel from "@/components/carousel";
 import {Images} from '@/theme'
 
 /** asset */
 import './style.scss'
+import {getCourseByCategories} from "../../api/course";
+import {useParams} from "react-router-dom";
 
 
-function Home() {
+function ListCourseCategory() {
     const dispatch = useDispatch()
-    const listCourse = useSelector(state => state.course?.list_course)
-
+    const {maDanhMuc} = useParams()
+    const listCourse = useSelector(state => state.course.course_by_categories)
     const settingCarousel = {
         dots: false,
-        infinite: true,
+        infinite: false,
         speed: 500,
         slidesToShow: 5,
         slidesToScroll: 4,
@@ -49,14 +51,15 @@ function Home() {
             }
         ]
     }
+
     useEffect(() => {
-        dispatch(actions.getListCourse())
+        dispatch(actions.getCourseByCategories({maDanhMuc}))
     }, [])
     return (
         <Page className="home">
             <div className="content">
-                Home page
-                <section className="section_course">
+                List course
+                <section className="section_course_list">
                     <Carousel settings={settingCarousel}>
                         {listCourse.map(x => {
                             return (
@@ -80,4 +83,4 @@ function Home() {
     )
 }
 
-export default Home
+export default ListCourseCategory

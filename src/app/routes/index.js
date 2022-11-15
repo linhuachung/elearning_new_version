@@ -17,23 +17,27 @@ import VI from '@/languages/app/vi.json'
 /** Layout */
 import NavBar from '@/app/nav-bar'
 import Header from '@/app/header'
+import Footer from '@/app/footer'
+
 /** component */
 import Loading from '@/components/loading'
 import Page from '@/components/page'
+
 import {initialize, addTranslation} from "react-localize-redux";
 
 /** page */
 const Login = lazy(() => import('@/pages/account/login'))
 const Home = lazy(() => import('@/pages/home'))
 const NotFound = lazy(() => import('@/pages/not-found'))
+const ListCourseCategory = lazy(() => import('@/pages/list-course-by-category'))
 
 const PrivateRoute = ({condition, redirect, ...props}) => {
     condition = condition()
     if (condition) return <Route {...props} />
     return <Redirect to={redirect}/>
 }
-const PublicRoute = ({...props}) => {
-    return <Route {...props} />
+const PublicRoute = ({condition, redirect, ...props}) => {
+  return <Route {...props} />
 }
 setLocale({
     mixed: {
@@ -50,7 +54,7 @@ setLocale({
 function RoutesComponent(props) {
     const {initialize, addTranslationForLanguage: add} = props
     useEffect(() => {
-        if (Storage.get('LANGUAGE') === 'vi') {
+        if (!Storage.has('LANGUAGE') || Storage.get('LANGUAGE') === 'vi') {
             initialize({
                 languages: [{
                     name: 'Vietnamese',
@@ -116,34 +120,35 @@ function RoutesComponent(props) {
     if (token) {
         Request.setAccessToken(`Bearer ${token}`)
     }
-
     const renderLazyComponent = (LazyComponent, params) => (props) => <LazyComponent {...props} {...params} />
-
-    const renderAuthRoutes = () => (
+     const renderAuthRoutes = () => (
         <Suspense fallback={<Page className="page-loading"><Loading/></Page>}>
             <Header/>
-            <NavBar/>
+            {/*<NavBar/>*/}
             <Switch>
                 <Route path="/not-found" component={renderLazyComponent(NotFound)}/>
                 <Redirect to="/not-found"/>
             </Switch>
+            <Footer/>
         </Suspense>
     )
     const renderPublicRoutes = () => (
         <Suspense fallback={<Page className="page-loading"><Loading/></Page>}>
             <Header/>
-            <NavBar/>
+            {/*<NavBar/>*/}
             <Switch>
                 <Route exact path="/" component={renderLazyComponent(Home)}/>
+                <Route exact path="/list-course/:maDanhMuc" component={renderLazyComponent(ListCourseCategory)}/>
                 <Redirect to="/not-found"/>
             </Switch>
+            <Footer/>
         </Suspense>
     )
     return (
         <BrowserRouter>
             <Suspense fallback={<Page><Loading/></Page>}>
                 <Switch>
-                    <Route exact path="/login" component={renderLazyComponent(Login)}/>
+                    {token ?  <PublicRoute component={renderPublicRoutes}/> : <Route exact path="/login" component={renderLazyComponent(Login)}/>}
                     <Route path="/not-found" component={renderLazyComponent(NotFound)}/>
                     <PublicRoute
                         component={renderPublicRoutes}

@@ -15,10 +15,9 @@ export default ({api, successMessage, errorHandler}) => function* ({type, data, 
     try {
         yield put({type: `${type}_REQUEST`, payload: data})
 
+
         const {accessToken, success, result, error} = yield api(data)
-        const dataResult = {
-            ...yield api(data)
-        }
+        const dataResult = yield api(data)
         if (accessToken) {
             yield put({type: successType, data: dataResult, payload: data})
 
@@ -26,6 +25,14 @@ export default ({api, successMessage, errorHandler}) => function* ({type, data, 
 
             if (callback) callback(successType, dataResult)
         }
+        yield put({type: successType, data: dataResult, payload: data})
+        // if (success) {
+        //     yield put({type: successType, data: result, payload: data})
+        //
+        //     if (successMessage) Notification.success(successMessage)
+        //
+        //     if (callback) callback(successType, result)
+        // }
 
         // if (success) {
         //     yield put({type: successType, data: result, payload: data})

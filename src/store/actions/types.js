@@ -1,10 +1,16 @@
 export default [
-  // UI
-  'TOGGLE_SIDE_BAR',
+    // UI
+    'TOGGLE_SIDE_BAR',
 
-  // API
-  'LOGIN',
+    // API
+    'LOGIN',
 
-  // Store
-  'CLEAR_STORE'
+    //  COURSE
+    "LIST_COURSE_BY_CATEGORIES",
+    "GET_LIST_COURSE",
+    "LIST_CATEGORIES",
+    "GET_COURSE_BY_CATEGORIES",
+
+    // Store
+    'CLEAR_STORE'
 ]

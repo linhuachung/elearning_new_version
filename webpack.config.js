@@ -78,7 +78,7 @@ module.exports = (env) => {
         plugins: [
             new HtmlWebpackPlugin({
                 template: path.resolve(__dirname, 'src/index.ejs'),
-                favicon: path.resolve(__dirname, 'src/resources/images/favicon.ico')
+                favicon: path.resolve(__dirname, 'src/resources/images/vi-flag.png')
             }),
             new webpack.IgnorePlugin({
                 resourceRegExp: /^\.\/locale$/,
