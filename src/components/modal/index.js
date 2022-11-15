@@ -18,7 +18,7 @@ const ModalComponents = ({children, ...props}, ref) => {
 
     return (
         <Modal
-            open={true}
+            open={isOpen}
             onCancel={() => {
                 setIsOpen(false)
             }}

@@ -1,29 +1,24 @@
 import React from 'react'
 import Slider from "react-slick";
+import './style.scss'
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import {LeftOutlined, RightOutlined} from "@ant-design/icons";
 
 function Carousel({children, settings}) {
     const NextArrow = props => {
         const {className, style, onClick} = props;
         return (
-            <div
-                className={className}
-                style={{...style, display: "block", background: "red"}}
-                onClick={onClick}
-            />
+            <RightOutlined  className={className}
+                            onClick={onClick}/>
         );
     }
 
     const PrevArrow = props => {
         const {className, style, onClick} = props;
         return (
-            <div
-                className={className}
-                style={{...style, display: "block", background: "green"}}
-                onClick={onClick}
-            />
+            <LeftOutlined  className={className} onClick={onClick}/>
         );
     }
 

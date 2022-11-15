@@ -2,23 +2,28 @@
   .slick-slider {
     button {
       //background: red;
-      
+
     }
   }
 
   .slick-slide {
-    max-width: 200px;
-    margin: 5px 15px;
-
+    div{
+      //margin: 0 5px;
+    }
     .carousel_item {
-
+      width: 90% !important;
+      display: block !important;
+      margin: 0 auto;
       img {
         width: 100%;
       }
     }
   }
 }
-
+.section_course{
+  border: 1px solid #d1d7dc;
+  padding: 3.2rem;
+}
 
 /*===============  RESPONSIVE  ==================*/
 
